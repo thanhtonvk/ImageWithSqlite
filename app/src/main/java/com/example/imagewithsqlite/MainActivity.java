@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    com.example.facerecognition.DBContext dbContext;
+    DBContext dbContext;
     Button btn_mocamera, btn_mothuvien;
     ImageView imageView;
     private static final int REQUEST_CAMERA = 54;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbContext = new com.example.facerecognition.DBContext(getApplicationContext());
+        dbContext = new DBContext(getApplicationContext());
         btn_mocamera = findViewById(R.id.btn_mocamera);
         btn_mothuvien = findViewById(R.id.btn_mothuvien);
         imageView = findViewById(R.id.image);
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //đọc ảnh đầu tiên từ csdl
         List<HinhAnh> hinhAnhList = dbContext.getHinhAnhs();
-        Bitmap bitmap= com.example.facerecognition.BitmapUtils.getImage(hinhAnhList.get(0).getAnh());
+        Bitmap bitmap= BitmapUtils.getImage(hinhAnhList.get(0).getAnh());
         imageView.setImageBitmap(bitmap);
 
         //mở ảnh từ thư viện
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CAMERA) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
-            HinhAnh hinhAnh = new HinhAnh("Hihi", com.example.facerecognition.BitmapUtils.getBytes(bitmap));
+            HinhAnh hinhAnh = new HinhAnh("Hihi", BitmapUtils.getBytes(bitmap));
             dbContext.add(hinhAnh);
         }
         if (requestCode == REQUEST_GALERY) {
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
                 //giảm dung lượng
                 Bitmap resize = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * 0.2), (int) (bitmap.getHeight() * 0.2), true);
-                byte[] anh = com.example.facerecognition.BitmapUtils.getBytes(resize);
+                byte[] anh = BitmapUtils.getBytes(resize);
                 HinhAnh hinhAnh = new HinhAnh("Haha", anh);
                 dbContext.add(hinhAnh);
             } catch (FileNotFoundException e) {
