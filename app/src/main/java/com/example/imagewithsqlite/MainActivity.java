@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
@@ -41,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //đọc ảnh đầu tiên từ csdl
-        List<HinhAnh> hinhAnhList = dbContext.getHinhAnhs();
-        Bitmap bitmap= BitmapUtils.getImage(hinhAnhList.get(0).getAnh());
-        imageView.setImageBitmap(bitmap);
+//        List<HinhAnh> hinhAnhList = dbContext.getHinhAnhs();
+//        Bitmap bitmap = BitmapUtils.getImage(hinhAnhList.get(0).getAnh());
+//        imageView.setImageBitmap(bitmap);
 
         //mở ảnh từ thư viện
         btn_mothuvien.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        //đọc ảnh thứ 2 từ csdl
-//        List<HinhAnh> hinhAnhList = dbContext.getHinhAnhs();
-//        Bitmap bitmap = BitmapUtils.getImage(hinhAnhList.get(1).getAnh());
-//        imageView.setImageBitmap(bitmap);
+
+
+        //load image tu link
+        Glide.with(MainActivity.this).load("https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/279700087_4057923214465783_7009461514321383623_n.png?_nc_cat=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=0VbqFrtEV_UAX-A4NtC&_nc_ht=scontent.fhan15-1.fna&oh=00_AT_n1K1YL1a70x8QV_IEP4nBaT5psGmKB-y8GmUg_7kNxA&oe=627328D8").into(imageView);
     }
 
     @Override
